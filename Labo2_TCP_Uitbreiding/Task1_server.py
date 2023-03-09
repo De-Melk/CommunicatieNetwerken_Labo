@@ -22,12 +22,12 @@ def handle_client(conn, addr):
         if data.decode('UTF-8') == DISCONNECT_MESSAGE:
             connected = False
             response = "[Disconected]".encode('UTF-8')
-            
+
         elif data.decode('UTF-8') == FILESHARE_MESSAGE:
             """ Receiving the filename from the client. """
             filename = conn.recv(SIZE).decode('UTF-8')
             print(f"[RECV] Receiving the filename.")
-            file = open(filename, "w")
+            file = open("Labo2_TCP_Uitbreiding/data_recv/" + filename, "w")
             conn.send("Filename received.".encode('UTF-8'))
 
             """ Receiving the file data from the client. """
