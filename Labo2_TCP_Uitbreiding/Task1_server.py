@@ -23,6 +23,7 @@ def handle_client(conn, addr):
             connected = False
             response = "[Disconected]".encode('UTF-8')
         elif data.decode('UTF-8') == FILESHARE_MESSAGE:
+            print('File Share')
             """ Receiving the filename from the client. """
             filename = conn.recv(SIZE).decode('UTF-8')
             print(f"[RECV] Receiving the filename.")
@@ -33,12 +34,13 @@ def handle_client(conn, addr):
             print(f"[RECV] Receiving the file data.")
             file.write(data)
             conn.send("File data received".encode('UTF-8'))
-        else:
-            print(f"[{addr}] ->", data.decode('UTF-8'))
-            response = "[MessageReceived]".encode('UTF-8')
 
             connected = False
             response = "[Disconected]".encode('UTF-8')
+
+        else:
+            print(f"[{addr}] ->", data.decode('UTF-8'))
+            response = "[MessageReceived]".encode('UTF-8')
 
         conn.sendall(response)
     

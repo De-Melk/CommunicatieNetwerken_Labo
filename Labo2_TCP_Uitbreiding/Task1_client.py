@@ -15,11 +15,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
     connected = True
     while connected:
-        tekst = input('geef input: ').encode('FORMAT')   #encode en decode voor binair formaat
+        tekst = input('geef input: ').encode(FORMAT)   #encode en decode voor binair formaat
         s.sendall(tekst)
         data = s.recv(1024)
-        print(data.decode('FORMAT'))
-        if tekst.decode('FORMAT') == DISCONNECT_MESSAGE:
+        print(data.decode(FORMAT))
+        if tekst.decode(FORMAT) == FILE_SHARE_MESSAGE:
             # opening and reading file
             file = open('data/test_data.txt', 'r')
             data = file.read()
@@ -40,5 +40,5 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             # Closing the connection from the server.
             connected = False
 
-        elif tekst.decode('FORMAT') == DISCONNECT_MESSAGE:
+        elif tekst.decode(FORMAT) == DISCONNECT_MESSAGE:
             connected = False
