@@ -1,8 +1,8 @@
 # echo-server.py
-
+import os
 import socket
 
-HOST = "192.168.7.90"  # Standard loopback interface address (localhost)
+HOST = "192.168.3.135"  # Standard loopback interface address (localhost)
 PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 DISCONNECT_MESSAGE = "!DISCONECT"
 FILESHARE_MESSAGE = "!FILE"
@@ -23,7 +23,6 @@ def handle_client(conn, addr):
             connected = False
             response = "[Disconected]".encode('UTF-8')
         elif data.decode('UTF-8') == FILESHARE_MESSAGE:
-            print('File Share')
             """ Receiving the filename from the client. """
             filename = conn.recv(SIZE).decode('UTF-8')
             print(f"[RECV] Receiving the filename.")

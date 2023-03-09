@@ -20,7 +20,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         
         if tekst.decode(FORMAT) == FILE_SHARE_MESSAGE:
             # opening and reading file
-            print("Plaats de file in .\data_send")
+            print("Plaats de file in '.\data_send'!")
             fileName = input("Geef de filenaam: ")
             file = open('data_send/' + fileName, 'r')
             data = file.read()

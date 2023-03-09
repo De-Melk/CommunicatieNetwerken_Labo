@@ -1,6 +1,9 @@
 # Uitbreiding labo TCP met Sockets
 
 ## Task1: Add File sharing
+    - Task1 server and client files 
+    - Disconnect message
+    - File Share Message
 
 ## Task2: Multi User
 
