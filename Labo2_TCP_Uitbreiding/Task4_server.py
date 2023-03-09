@@ -1,7 +1,7 @@
 import threading
 import socket
 
-HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
+HOST = "192.168.7.90"  # Standard loopback interface address (localhost)
 PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 DISCONNECT_MESSAGE = "!DISCONNECT"
 ADDR = (HOST, PORT)
@@ -32,7 +32,7 @@ def send_msg(conn, addr):
 
 def start():
     global connected
-    while not connected:
+    while True:
         conn, addr = s.accept()
         print(f"[Connected] client {addr} connected")
         connected = True
