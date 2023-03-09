@@ -1,5 +1,5 @@
 # echo-server.py
-import os
+import os.path
 import socket
 
 HOST = "192.168.3.135"  # Standard loopback interface address (localhost)
@@ -24,13 +24,15 @@ def handle_client(conn, addr):
             response = "[Disconected]".encode('UTF-8')
 
         elif data.decode('UTF-8') == FILESHARE_MESSAGE:
-            """ Receiving the filename from the client. """
+            #Receiving the filename from the client.
             filename = conn.recv(SIZE).decode('UTF-8')
+            if os.path.isfile(path):
+                
             print(f"[RECV] Receiving the filename.")
             file = open("Labo2_TCP_Uitbreiding/data_recv/" + filename, "w")
             conn.send("Filename received.".encode('UTF-8'))
 
-            """ Receiving the file data from the client. """
+            #Receiving the file data from the client.
             data = conn.recv(SIZE).decode('UTF-8')
             print(f"[RECV] Receiving the file data.")
             file.write(data)
