@@ -12,5 +12,3 @@
 ## Task4: Peer to Peer TCP netwotk with chat and fileshare
 
 ## Task5: extend task4 for multiple peers
-
-## git test
