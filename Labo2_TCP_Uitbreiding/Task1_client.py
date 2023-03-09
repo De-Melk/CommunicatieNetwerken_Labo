@@ -2,7 +2,7 @@
 
 import socket
 
-HOST = "192.168.7.90"  # The server's hostname or IP address
+HOST = "192.168.3.135"  # The server's hostname or IP address
 PORT = 65432  # The port used by the server
 DISCONNECT_MESSAGE = "!DISCONECT"
 FILE_SHARE_MESSAGE = '!FILE'
@@ -17,15 +17,16 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     while connected:
         tekst = input('geef input: ').encode(FORMAT)   #encode en decode voor binair formaat
         s.sendall(tekst)
-        data = s.recv(1024)
-        print(data.decode(FORMAT))
+        
         if tekst.decode(FORMAT) == FILE_SHARE_MESSAGE:
             # opening and reading file
-            file = open('data/test_data.txt', 'r')
+            print("Plaats de file in .\data_send")
+            fileName = input("Geef de filenaam: ")
+            file = open('data_send/' + fileName, 'r')
             data = file.read()
 
             # Sending the filename to the server.
-            s.send("test_data.txt".encode(FORMAT))
+            s.send(fileName.encode(FORMAT))
             msg = s.recv(SIZE).decode(FORMAT)
             print(f"[SERVER]: {msg}")
 
@@ -40,5 +41,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             # Closing the connection from the server.
             connected = False
 
-        elif tekst.decode(FORMAT) == DISCONNECT_MESSAGE:
+        data = s.recv(1024)
+        print(data.decode(FORMAT))
+
+        if tekst.decode(FORMAT) == DISCONNECT_MESSAGE:
             connected = False
