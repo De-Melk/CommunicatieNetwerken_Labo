@@ -1,49 +1,48 @@
 import threading
 import socket
 
-HOST = "192.168.7.90"  # Standard loopback interface address (localhost)
+HOST = "192.168.173.135"  # Standard loopback interface address (localhost)
 PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 DISCONNECT_MESSAGE = "!DISCONNECT"
 ADDR = (HOST, PORT)
 connected = False
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind(ADDR)
+# create socket object for the server
+#AF_INET = IPV4  SOCK_STREAM = TCP
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# bind the socket object to an address and port
+server_socket.bind(ADDR)
 
-def recv_msg(conn, addr):
-    global connected
-    while connected:
-        recv_msg = conn.recv(1024)
-        print(f"[{addr}] ->", recv_msg.decode('UTF-8'))
-        if recv_msg.decode('UTF-8') == DISCONNECT_MESSAGE:
-            conn.sendall("[Disconnected]".encode('UTF-8'))
-            conn.close()
-            connected = False
-            print(f"[{addr}] ->", "CLOSED THE CONNECTION!")
+# listen for incoming connections
+server_socket.listen()
+print("Server is listening for incoming connections...")
 
-def send_msg(conn, addr):
-    global connected
-    while connected:
-        try:
-            send_msg = input(str())
-            conn.sendall(send_msg.encode('UTF-8'))
-        except:
-            print("[No Client] can't send message when no client is connected")
+# list to keep track of all client sockets
+sockets = []
 
-def start():
-    global connected
+# function to handle incoming connections
+def handle_client(client_socket, client_address):
+    print(f"Connection from {client_address} has been established!")
+    
+    # add client socket to list
+    sockets.append(client_socket)
+
     while True:
-        conn, addr = s.accept()
-        print(f"[Connected] client {addr} connected")
-        connected = True
-        t_recv = threading.Thread(target=recv_msg, args=(conn, addr))
-        t_recv.start()
-        t_send = threading.Thread(target=send_msg, args=(conn, addr))
-        t_send.start()
+        # receive message from client
+        message = client_socket.recv(1024).decode()
+        print(f"Received message: {message}")
 
-print("[STARTING] server is starting...")
-s.listen()
-print(f"[LISTENING] Server is listening on {HOST}")
+        # send message to all connected clients except sender
+        for sock in sockets:
+            if sock != server_socket and sock != client_socket:
+                sock.sendall(message.encode())
 
+# main loop to accept incoming connections
 while True:
-    start()
+    # accept incoming connections
+    client_socket, client_address = server_socket.accept()
+
+    # create a new thread to handle the connection
+    client_thread = threading.Thread(target=handle_client, args=(client_socket, client_address))
+    client_thread.start()
+

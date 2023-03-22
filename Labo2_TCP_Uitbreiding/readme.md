@@ -12,5 +12,8 @@
  - grafiek met vergelijking
 
 ## Task4: Peer to Peer TCP netwotk with chat and fileshare
+ - Peer to Peer chat aplication
+ - exit message
+ - multiple peers
 
 ## Task5: extend task4 for multiple peers
