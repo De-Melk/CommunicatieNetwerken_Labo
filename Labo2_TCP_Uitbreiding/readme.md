@@ -8,6 +8,8 @@
 ## Task2: Multi User
 
 ## Task3: Use matplatlib
+ - distrubution time P2P vs Client-Server
+ - grafiek met vergelijking
 
 ## Task4: Peer to Peer TCP netwotk with chat and fileshare
 
