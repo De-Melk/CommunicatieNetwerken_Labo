@@ -15,9 +15,9 @@
  - distrubution time P2P vs Client-Server
  - grafiek met vergelijking
 
-## Task4: Peer to Peer TCP netwotk with chat and fileshare
+## Task4: Peer to Peer TCP chat network.
  - Peer to Peer chat aplication
  - exit message
  - multiple peers
 
-## Task5: extend task4 for multiple peers
+## Task5: extend task4 for P2P file sharing.
