@@ -3,11 +3,8 @@ import threading
 import os
 
 s = socket.socket(socket.AF_INET , socket.SOCK_DGRAM )
-<<<<<<< Updated upstream:Labo3_UDP/Yorrit/UPD-chat.py
 s.bind((socket.gethostname(),2222))
-=======
 s.bind(("192.168.7.67",2222))
->>>>>>> Stashed changes:Labo3_UDP/Yorrit/test.py
 print("\t\t\t====>  UDP CHAT APP  <=====")
 print("=============================================="*2)
 nm = input("ENTER YOUR NAME : ")
