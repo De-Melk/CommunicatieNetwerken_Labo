@@ -1,7 +1,7 @@
 import threading
 import socket
 
-HOST = "192.168.173.135"  # Standard loopback interface address (localhost)
+HOST = "192.168.7.67"  # Standard loopback interface address (localhost)
 PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 DISCONNECT_MESSAGE = "!DISCONNECT"
 ADDR = (HOST, PORT)
