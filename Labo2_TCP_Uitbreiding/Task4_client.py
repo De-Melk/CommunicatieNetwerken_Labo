@@ -1,7 +1,7 @@
 import threading
 import socket
 
-HOST = "192.168.173.135"  # The server's hostname or IP address
+HOST = "192.168.7.67"  # The server's hostname or IP address
 PORT = 65432  # The port used by the server
 DISCONNECT_MESSAGE = "!DISCONNECT"
 connected = True

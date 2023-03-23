@@ -26,7 +26,6 @@ def handle_client(conn, addr):
         elif data.decode('UTF-8') == FILESHARE_MESSAGE:
             #Receiving the filename from the client.
             filename = conn.recv(SIZE).decode('UTF-8')
-            if os.path.isfile(path):
                 
             print(f"[RECV] Receiving the filename.")
             file = open("Labo2_TCP_Uitbreiding/data_recv/" + filename, "w")

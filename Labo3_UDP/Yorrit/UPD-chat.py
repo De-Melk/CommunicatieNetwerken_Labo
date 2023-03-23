@@ -3,13 +3,16 @@ import threading
 import os
 
 s = socket.socket(socket.AF_INET , socket.SOCK_DGRAM )
-s.bind(("192.168.225.34",2222))
+s.bind((socket.gethostname(),2222))
 print("\t\t\t====>  UDP CHAT APP  <=====")
-print("==============================================")
+print("=============================================="*2)
 nm = input("ENTER YOUR NAME : ")
 print("\nType 'quit' to exit.")
 
-ip,port = input("Enter IP address and Port number: ").split()
+#ip,port = input("Enter IP address and Port number: ").split()
+ip = socket.gethostname()
+port = 3333
+print("client connected on: ", ip, port)
 
 def send():
     while True:
@@ -22,7 +25,7 @@ def send():
 def rec():
     while True:
         msg = s.recvfrom(1024)
-        print("\t\t\t\t >> " +  msg[0].decode()  )
+        print("\n<< " +  msg[0].decode()  )
         print(">> ")
 x1 = threading.Thread( target = send )
 x2 = threading.Thread( target = rec )

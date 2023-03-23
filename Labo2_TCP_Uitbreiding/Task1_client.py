@@ -2,7 +2,7 @@
 
 import socket
 
-HOST = "192.168.3.135"  # The server's hostname or IP address
+HOST = "192.168.7.67"  # The server's hostname or IP address
 PORT = 65432  # The port used by the server
 DISCONNECT_MESSAGE = "!DISCONECT"
 FILE_SHARE_MESSAGE = '!FILE'
@@ -22,7 +22,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             # opening and reading file
             print("Plaats de file in './data_send'!")
             fileName = input("Geef de filenaam: ")
-            file = open('data_send/' + fileName, 'r')
+            file = open('Labo2_TCP_Uitbreiding/data_send/' + fileName, 'r')
             data = file.read()
 
             # Sending the filename to the server.
