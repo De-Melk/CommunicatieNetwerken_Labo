@@ -14,7 +14,7 @@ ip = socket.gethostname()       #Client ipaddres
 port = 2222                     #port used by other chatter
 print("client connected on: ", ip, port)
 
-def send():
+def send():             #send message to server
     while True:
         ms = input(">> ")
         if ms == "quit":
@@ -22,11 +22,13 @@ def send():
         sm = "{}  : {}".format(nm,ms)
         s.sendto(sm.encode() , (ip,int(port)))
 
-def rec():
+def rec():          #receive message from client
     while True:
         msg = s.recvfrom(1024)
         print("\n<< " +  msg[0].decode()  )
         print(">> ")
+
+        
 x1 = threading.Thread( target = send )
 x2 = threading.Thread( target = rec )
 
