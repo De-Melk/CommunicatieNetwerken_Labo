@@ -1,22 +1,31 @@
-# echo-client.py
-
+import threading
 import socket
 
 HOST = "127.0.0.1"  # The server's hostname or IP address
 PORT = 65432  # The port used by the server
-DISCONNECT_MESSAGE = "!DISCONECT"
+DISCONNECT_MESSAGE = "!DISCONNECT"
+connected = True
 
 
-#AF_INET used for IPv4
-#SOCK_DGRAM used for UDP protocol
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((HOST, PORT))
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((HOST, PORT))
+print("[Connected to server]")
 
-    connected = True
+def recv_msg():
+    global connected
     while connected:
-        tekst = input('geef input: ').encode('UTF-8')   #encode en decode voor binair formaat 
-        s.sendall(tekst)
-        data = s.recv(1024)
-        print(data.decode('UTF-8'))
-        if tekst.decode('UTF-8') == DISCONNECT_MESSAGE:
+        recv_msg = s.recv(1024)
+        print("[Server] ->",recv_msg.decode('UTF-8'))
+
+def send_msg():
+    global connected
+    while connected:
+        send_msg = input(str())
+        s.send(send_msg.encode('UTF-8'))
+        if send_msg == DISCONNECT_MESSAGE:
             connected = False
+
+t = threading.Thread(target=recv_msg)
+t.start()
+
+send_msg()
