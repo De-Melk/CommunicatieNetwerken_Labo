@@ -3,7 +3,7 @@ import threading
 import os
 
 s = socket.socket(socket.AF_INET , socket.SOCK_DGRAM )
-s.bind((socket.gethostname(),2222))     #Client ip and portnumber
+s.bind((socket.gethostname(),3333))     #Client ip and portnumber
 print("\t\t\t====>  UDP CHAT APP  <=====")
 print("=============================================="*2)
 nm = input("ENTER YOUR NAME : ")
