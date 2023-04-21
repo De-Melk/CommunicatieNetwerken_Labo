@@ -19,14 +19,16 @@ def main():          #receive message from client
         msg, addr = s.recvfrom(1024)
         #print(msg.decode())
         #print(addr)
-        #if msg.decode().split(":")[1].strip() == "quit":
-        #    clientList.remove(addr)
-        if len(clientList) == 0:
+        #print(((msg.decode().split(":"))[1]).strip())
+        print(clientList)
+
+        if clientList.count(addr) == 0:
             clientList.append(addr)
-        else:
-            for i in clientList:
-                if i != addr:
-                    clientList.append(addr)
+        
+        if ((msg.decode().split(":"))[1]).strip() == "quit":
+            clientList.remove(addr)
+            print(clientList)
+
 
 
         for i in clientList:

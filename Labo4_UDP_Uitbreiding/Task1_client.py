@@ -13,12 +13,15 @@ print("\nType 'quit' to exit.")
 ip = socket.gethostname()       #Client ipaddres
 port = 4444                     #port used by other chatter
 print("client connected on: ", ip, port)
-s.sendto("connect".encode(), (ip,int(port)))
+sm = "{}  : {}".format(nm,"connect")
+s.sendto(sm.encode(), (ip,int(port)))
 
 def send():             #send message to server
     while True:
         ms = input(">> ")
         if ms == "quit":
+            sm = "{}  : {}".format(nm,ms)
+            s.sendto(sm.encode() , (ip,int(port)))
             os._exit(1)
         sm = "{}  : {}".format(nm,ms)
         s.sendto(sm.encode() , (ip,int(port)))
