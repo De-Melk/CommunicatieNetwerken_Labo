@@ -42,7 +42,7 @@ def start():
         t_send.start()
 
 print("[STARTING] server is starting...")
-s.listen()
+s.listen()      #listen for incomming client connections
 print(f"[LISTENING] Server is listening on {HOST}")
 
 while True:
