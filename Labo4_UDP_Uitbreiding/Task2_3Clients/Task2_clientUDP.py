@@ -13,21 +13,21 @@ SERVER = (socket.gethostname(),50001)   #"To fill up"
 
 print('connecting to the SERVER')
 
-sock = socket.socket(socket.AF_INET , socket.SOCK_DGRAM) #"To fill up"
+sock = socket.socket(socket.AF_INET , socket.SOCK_DGRAM) ##start over ipv4 and UDP
  
-sock.bind((socket.gethostname(),50010))     #"To fill up"
+sock.bind((socket.gethostname(),50010))     #bind to ip and port
                                             
 
 sock.sendto('0'.encode(), SERVER)
 
 while True:
-    data = sock.recv(1024).decode()
+    data = sock.recv(1024).decode()     #receive message from server
 
-    if data.strip() == 'ready':
+    if data.strip() == 'ready':     # if message is ready start p2p connections
         print('Checked in with server, waiting for Peer')
         break
 
-data = sock.recv(1024).decode()
+data = sock.recv(1024).decode()     #recieve other peerw addresses
 ipC1, sourceC1, destinationC1, ipC2, sourceC2, destinationC2 = data.split(' ')
 sourceC1 = int(sourceC1)
 destinationC1 = int(destinationC1)
@@ -42,16 +42,16 @@ print('  ip client2:          {}'.format(ipC2))
 print('  source port client2: {}'.format(sourceC2))
 print('  dest port client2:   {}\n'.format(destinationC2))
 
-sock = socket.socket(socket.AF_INET , socket.SOCK_DGRAM) #"To fill up"
+sock = socket.socket(socket.AF_INET , socket.SOCK_DGRAM) 
 
-sock.bind((socket.gethostname(),50011)) #"To fill up"
+sock.bind((socket.gethostname(),50011)) 
 sock.sendto('0'.encode(), (ipC1, destinationC1))
 
 print('ready to exchange messages\n')
 
-def listen():
-    sock = socket.socket(socket.AF_INET , socket.SOCK_DGRAM) #"To fill up"
-    sock.bind((socket.gethostname(),50010)) #"To fill up"
+def listen():       #revieve messages from other peers
+    sock = socket.socket(socket.AF_INET , socket.SOCK_DGRAM) 
+    sock.bind((socket.gethostname(),50010)) 
 
     while True:
         data = sock.recv(1024)
@@ -60,10 +60,10 @@ def listen():
 listener = threading.Thread(target=listen, daemon=True)
 listener.start()
 
-sock = socket.socket(socket.AF_INET , socket.SOCK_DGRAM) #"To fill up"
-sock.bind((socket.gethostname(),50011)) #"To fill up"
+sock = socket.socket(socket.AF_INET , socket.SOCK_DGRAM) 
+sock.bind((socket.gethostname(),50011)) 
 
-while True:
+while True:     #send massages to other peers
     msg = input('--> ')
     sock.sendto(msg.encode(), (ipC1, sourceC1))
     sock.sendto(msg.encode(), (ipC2, sourceC2))

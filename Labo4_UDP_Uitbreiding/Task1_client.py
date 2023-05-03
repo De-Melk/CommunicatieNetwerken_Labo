@@ -2,7 +2,7 @@ import socket
 import threading
 import os
 
-s = socket.socket(socket.AF_INET , socket.SOCK_DGRAM )
+s = socket.socket(socket.AF_INET , socket.SOCK_DGRAM ) #start TCP over ipv4 and UDP
 s.bind((socket.gethostname(),2222))     #Client ip and portnumber
 print("\t\t\t====>  UDP CHAT APP  <=====")
 print("=============================================="*2)
