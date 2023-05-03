@@ -3,7 +3,7 @@ import socket
 
 HOST = "192.168.7.67"  # The server's hostname or IP address
 PORT = 65432  # The port used by the server
-DISCONNECT_MESSAGE = "!DISCONNECT"
+DISCONNECT_MESSAGE = "!DISCONNECT"  #message to disconect
 connected = True
 
 def receive_messages(sock):
@@ -31,8 +31,8 @@ def send_messages(sock):
 def main():
     try:
         # connect to the server
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.connect((HOST, PORT))
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)    #start TCP over ipv4 and TCP
+        sock.connect((HOST, PORT))      #connect to Server via IP and port
 
         # start separate threads to handle receiving and sending messages
         receive_thread = threading.Thread(target=receive_messages, args=(sock,))
