@@ -16,7 +16,7 @@ print('connecting to the SERVER')
 sock = socket.socket(socket.AF_INET , socket.SOCK_DGRAM) #"To fill up"
  
 sock.bind((socket.gethostname(),50010))     #"To fill up"
-                                            
+                                             
 
 sock.sendto('0'.encode(), SERVER)
 

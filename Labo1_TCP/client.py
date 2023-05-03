@@ -17,4 +17,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         data = s.recv(1024)
         print(data.decode('UTF-8'))
         if tekst.decode('UTF-8') == DISCONNECT_MESSAGE:
-            connected = False
+            connected = False 

@@ -16,7 +16,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:        #start TCP o
         tekst = input('geef input: ').encode(FORMAT)   #encode en decode voor binair formaat
         s.sendall(tekst)            #send input message to server
         
-        if tekst.decode(FORMAT) == FILE_SHARE_MESSAGE:      #send file
+        if tekst.decode(FORMAT) == FILE_SHARE_MESSAGE:      #send file 
             # opening and reading file
             print("Plaats de file in './data_send'!")
             fileName = input("Geef de filenaam: ")

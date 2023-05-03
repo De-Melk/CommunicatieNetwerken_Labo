@@ -46,5 +46,5 @@ def main():
         print("An error occurred while running the client.")
         raise
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     main()
